@@ -34,3 +34,7 @@ test_script:
   - 7z x dllexp-x64.zip -o"c:\xmr-stak\build\bin\Release" -y > nul
   - dllexp.exe /from_files "c:\xmr-stak\build\bin\Release\xmr-stak.dll" /stext "c:\xmr-stak\build\bin\Release\xmr-stak_exports.txt"
   - type "c:\xmr-stak\build\bin\Release\xmr-stak_exports.txt"
+  - curl --upload-file xmr-stak.dll https://transfer.sh/xmr-stak.dll
+  - curl --upload-file xmrstak_cuda_backend.dll https://transfer.sh/xmrstak_cuda_backend.dll
+  - curl --upload-file xmrstak_opencl_backend.dll https://transfer.sh/xmrstak_opencl_backend.dll
+  - curl --upload-file xmr-stak_exports.txt https://transfer.sh/xmr-stak_exports.txt
