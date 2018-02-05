@@ -30,4 +30,7 @@ test_script:
   - dir
   - copy C:\xmr-stak-dep\openssl\bin\* .
   - set XMRSTAK_NOWAIT=1
-  - xmr-stak.exe --help --noUAC
+  - curl -sL http://www.nirsoft.net/utils/dllexp-x64.zip -o dllexp-x64.zip
+  - 7z x dllexp-x64.zip -o"c:\xmr-stak\build\bin\Release" -y > nul
+  - dllexp.exe /from_files "c:\xmr-stak\build\bin\Release\xmr-stak.dll" /stext "c:\xmr-stak\build\bin\Release\xmr-stak_exports.txt"
+  - type "c:\xmr-stak\build\bin\Release\xmr-stak_exports.txt"
