@@ -526,7 +526,10 @@ set_source_files_properties(${SRCFILES_CPP} PROPERTIES LANGUAGE CXX)
 #    ${SRCFILES_CPP}
 #)
 
+add_library(xmr-stak SHARED ${SRCFILES_CPP})
 add_library(xmr-stak STATIC ${SRCFILES_CPP})
+add_executable(xmr-stak    ${SRCFILES_CPP})
+
 
 set(EXECUTABLE_OUTPUT_PATH "bin")
 set(LIBRARY_OUTPUT_PATH "bin")
