@@ -373,6 +373,18 @@ void do_guided_config()
 	std::cout<<"Configuration stored in file '"<<params::inst().configFile<<"'"<<std::endl;
 }
 
+extern "C"  {
+	#ifdef WIN32
+	__declspec(dllexport) 
+	#endif
+
+	int entry_point(int argc, char *argv[])
+	{
+		environment::inst(&env);
+		return main(argc, *argv[]);
+	}
+} // extern "C"
+
 int main(int argc, char *argv[])
 {
 #ifndef CONF_NO_TLS
