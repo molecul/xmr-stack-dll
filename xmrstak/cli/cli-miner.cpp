@@ -30,7 +30,7 @@
 #include "xmrstak/donate-level.hpp"
 #include "xmrstak/params.hpp"
 #include "xmrstak/misc/configEditor.hpp"
-#include "xmrstak/misc/environment.hpp"
+//#include "xmrstak/misc/environment.hpp"
 #include "xmrstak/version.hpp"
 #include "xmrstak/misc/utility.hpp"
 
@@ -381,7 +381,7 @@ extern "C"  {
 
 	int entry_point(int argc, char *argv[])
 	{
-		environment::inst(&env);
+		//environment::inst(&env);
 		return main(argc, *argv[]);
 	}
 } // extern "C"
