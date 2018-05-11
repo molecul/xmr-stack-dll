@@ -507,7 +507,7 @@ if(OpenCL_FOUND)
 #        STATIC
 #       ${OPENCLSRCFILES}
 #    )
-#    target_link_libraries(xmrstak_opencl_backend ${OpenCL_LIBRARY} )
+#    target_link_libraries(xmrstak_opencl_backend ${OpenCL_LIBRARY})
 #    target_link_libraries(xmrstak_opencl_backend xmr-stak-backend)
 endif()
 
@@ -524,7 +524,7 @@ add_library(xmr-stak SHARED ${SRCFILES_CPP} ${CUDASRCFILES} ${OPENCLSRCFILES})
 set(EXECUTABLE_OUTPUT_PATH "bin")
 set(LIBRARY_OUTPUT_PATH "bin")
 
-target_link_libraries(xmr-stak ${LIBS} xmr-stak-c xmr-stak-backend)
+target_link_libraries(xmr-stak ${LIBS} xmr-stak-c xmr-stak-backend ${OpenCL_LIBRARY} ${CUDA_LIBRARIES})
 
 ################################################################################
 # Install
