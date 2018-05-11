@@ -481,7 +481,7 @@ if(CUDA_FOUND)
         # build device code with clang
         add_library(
             xmrstak_cuda_backend
-            SHARED
+            STATIC
             ${CUDASRCFILES}
         )
         set_target_properties(xmrstak_cuda_backend PROPERTIES COMPILE_FLAGS ${CLANG_BUILD_FLAGS})
@@ -491,7 +491,7 @@ if(CUDA_FOUND)
         #  build device code with nvcc
         cuda_add_library(
             xmrstak_cuda_backend
-            SHARED
+            STATIC
             ${CUDASRCFILES}
         )
     endif()
@@ -505,7 +505,7 @@ if(OpenCL_FOUND)
         "xmrstak/backend/amd/amd_gpu/*.cpp"
         "xmrstak/backend/amd/*.cpp")
     add_library(xmrstak_opencl_backend
-        SHARED
+        STATIC
         ${OPENCLSRCFILES}
     )
     target_link_libraries(xmrstak_opencl_backend ${OpenCL_LIBRARY} )
