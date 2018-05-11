@@ -382,7 +382,7 @@ extern "C"  {
 	int entry_point(int argc, char *argv[])
 	{
 		//environment::inst(&env);
-		return main(argc, *argv[]);
+		return main(argc, argv);
 	}
 } // extern "C"
 
