@@ -476,27 +476,26 @@ if(CUDA_FOUND)
     file(GLOB CUDASRCFILES 
         "xmrstak/backend/nvidia/nvcc_code/*.cu"
         "xmrstak/backend/nvidia/*.cpp")
-
-    if(CUDA_COMPILER STREQUAL "clang")
-        # build device code with clang
-        add_library(
-            xmrstak_cuda_backend
-            STATIC
-            ${CUDASRCFILES}
-        )
-        set_target_properties(xmrstak_cuda_backend PROPERTIES COMPILE_FLAGS ${CLANG_BUILD_FLAGS})
-        set_target_properties(xmrstak_cuda_backend PROPERTIES LINKER_LANGUAGE CXX)
-        set_source_files_properties(${CUDASRCFILES} PROPERTIES LANGUAGE CXX)
-    else()
-        #  build device code with nvcc
-        cuda_add_library(
-            xmrstak_cuda_backend
-            STATIC
-            ${CUDASRCFILES}
-        )
-    endif()
-    target_link_libraries(xmrstak_cuda_backend ${CUDA_LIBRARIES})
-    target_link_libraries(xmrstak_cuda_backend xmr-stak-backend)
+#    if(CUDA_COMPILER STREQUAL "clang")
+#        # build device code with clang
+#        add_library(
+#           xmrstak_cuda_backend
+#           STATIC
+#           ${CUDASRCFILES}
+#       )
+#       set_target_properties(xmrstak_cuda_backend PROPERTIES COMPILE_FLAGS ${CLANG_BUILD_FLAGS})
+#       set_target_properties(xmrstak_cuda_backend PROPERTIES LINKER_LANGUAGE CXX)
+#       set_source_files_properties(${CUDASRCFILES} PROPERTIES LANGUAGE CXX)
+#   else()
+#       #  build device code with nvcc
+#       cuda_add_library(
+#           xmrstak_cuda_backend
+#           STATIC
+#           ${CUDASRCFILES}
+#       )
+#   endif()
+#   target_link_libraries(xmrstak_cuda_backend ${CUDA_LIBRARIES})
+#   target_link_libraries(xmrstak_cuda_backend xmr-stak-backend)
 endif()
 
 # compile AMD backend
@@ -504,12 +503,12 @@ if(OpenCL_FOUND)
     file(GLOB OPENCLSRCFILES  
         "xmrstak/backend/amd/amd_gpu/*.cpp"
         "xmrstak/backend/amd/*.cpp")
-    add_library(xmrstak_opencl_backend
-        STATIC
-        ${OPENCLSRCFILES}
-    )
-    target_link_libraries(xmrstak_opencl_backend ${OpenCL_LIBRARY} )
-    target_link_libraries(xmrstak_opencl_backend xmr-stak-backend)
+#    add_library(xmrstak_opencl_backend
+#        STATIC
+#       ${OPENCLSRCFILES}
+#    )
+#    target_link_libraries(xmrstak_opencl_backend ${OpenCL_LIBRARY} )
+#    target_link_libraries(xmrstak_opencl_backend xmr-stak-backend)
 endif()
 
 # compile final binary
@@ -517,7 +516,7 @@ file(GLOB SRCFILES_CPP "xmrstak/cli/*.cpp")
 set_source_files_properties(${SRCFILES_CPP} PROPERTIES LANGUAGE CXX)
 
 
-add_library(xmr-stak SHARED ${SRCFILES_CPP})
+add_library(xmr-stak SHARED ${SRCFILES_CPP} ${CUDASRCFILES} ${OPENCLSRCFILES})
 #add_library(xmr-stak STATIC ${SRCFILES_CPP})
 #add_executable(xmr-stak ${SRCFILES_CPP})
 
@@ -538,20 +537,20 @@ if( NOT CMAKE_INSTALL_PREFIX STREQUAL PROJECT_BINARY_DIR )
             RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
     if(CUDA_FOUND)
         if(WIN32)
-            install(TARGETS xmrstak_cuda_backend
-                RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
+            #install(TARGETS xmrstak_cuda_backend
+            #    RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
         else()
-            install(TARGETS xmrstak_cuda_backend
-                LIBRARY DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
+            #install(TARGETS xmrstak_cuda_backend
+            #    LIBRARY DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
         endif()
     endif()
     if(OpenCL_FOUND)
         if(WIN32)
-            install(TARGETS xmrstak_opencl_backend
-                RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
+            #install(TARGETS xmrstak_opencl_backend
+            #    RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
         else()
-            install(TARGETS xmrstak_opencl_backend
-                LIBRARY DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
+            #install(TARGETS xmrstak_opencl_backend
+            #    LIBRARY DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
         endif()
     endif()
 else()
