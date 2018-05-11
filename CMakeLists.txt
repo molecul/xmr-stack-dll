@@ -476,26 +476,25 @@ if(CUDA_FOUND)
     file(GLOB CUDASRCFILES 
         "xmrstak/backend/nvidia/nvcc_code/*.cu"
         "xmrstak/backend/nvidia/*.cpp")
-#    if(CUDA_COMPILER STREQUAL "clang")
-#        # build device code with clang
-#        add_library(
-#           xmrstak_cuda_backend
-#           STATIC
-#           ${CUDASRCFILES}
-#       )
-#       set_target_properties(xmrstak_cuda_backend PROPERTIES COMPILE_FLAGS ${CLANG_BUILD_FLAGS})
-#       set_target_properties(xmrstak_cuda_backend PROPERTIES LINKER_LANGUAGE CXX)
-#       set_source_files_properties(${CUDASRCFILES} PROPERTIES LANGUAGE CXX)
-#   else()
-#       #  build device code with nvcc
-#       cuda_add_library(
-#           xmrstak_cuda_backend
-#           STATIC
-#           ${CUDASRCFILES}
-#       )
-#   endif()
-#   target_link_libraries(xmrstak_cuda_backend ${CUDA_LIBRARIES})
-#   target_link_libraries(xmrstak_cuda_backend xmr-stak-backend)
+    if(CUDA_COMPILER STREQUAL "clang")
+        # build device code with clang
+        add_library(
+           xmrstak_cuda_backend
+           STATIC
+           ${CUDASRCFILES}
+       )
+       set_target_properties(xmrstak_cuda_backend PROPERTIES COMPILE_FLAGS ${CLANG_BUILD_FLAGS})
+       set_target_properties(xmrstak_cuda_backend PROPERTIES LINKER_LANGUAGE CXX)
+       set_source_files_properties(${CUDASRCFILES} PROPERTIES LANGUAGE CXX)
+   else()
+       #  build device code with nvcc
+       cuda_add_library(
+           xmrstak_cuda_backend
+           STATIC
+           ${CUDASRCFILES}
+       )
+   endif()
+   target_link_libraries(xmrstak_cuda_backend ${CUDA_LIBRARIES})
 endif()
 
 # compile AMD backend
@@ -525,7 +524,7 @@ set(EXECUTABLE_OUTPUT_PATH "bin")
 set(LIBRARY_OUTPUT_PATH "bin")
 
 #target_link_libraries(xmr-stak ${LIBS} xmr-stak-c xmr-stak-backend ${OpenCL_LIBRARY} ${CUDA_LIBRARIES})
-target_link_libraries(xmr-stak ${LIBS} xmr-stak-c ${CMAKE_DL_LIBS} ${OpenCL_LIBRARY} ${CUDA_LIBRARIES})
+target_link_libraries(xmr-stak ${LIBS} xmr-stak-c ${CMAKE_DL_LIBS} ${OpenCL_LIBRARY} ${CUDA_LIBRARIES} xmrstak_cuda_backend)
 
 ################################################################################
 # Install
