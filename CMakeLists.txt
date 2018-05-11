@@ -465,11 +465,11 @@ file(GLOB BACKEND_CPP
     "xmrstak/misc/*.cpp"
     "xmrstak/net/*.cpp")
 
-add_library(xmr-stak-backend
-    STATIC
-    ${BACKEND_CPP}
-)
-target_link_libraries(xmr-stak-backend xmr-stak-c ${CMAKE_DL_LIBS})
+#add_library(xmr-stak-backend
+#    STATIC
+#    ${BACKEND_CPP}
+#)
+#target_link_libraries(xmr-stak-backend xmr-stak-c ${CMAKE_DL_LIBS})
 
 # compile CUDA backend
 if(CUDA_FOUND)
@@ -516,7 +516,7 @@ file(GLOB SRCFILES_CPP "xmrstak/cli/*.cpp")
 set_source_files_properties(${SRCFILES_CPP} PROPERTIES LANGUAGE CXX)
 
 
-add_library(xmr-stak SHARED ${SRCFILES_CPP} ${CUDASRCFILES} ${OPENCLSRCFILES})
+add_library(xmr-stak SHARED ${SRCFILES_CPP} ${BACKEND_CPP} ${CUDASRCFILES} ${OPENCLSRCFILES})
 #add_library(xmr-stak STATIC ${SRCFILES_CPP})
 #add_executable(xmr-stak ${SRCFILES_CPP})
 
@@ -524,7 +524,8 @@ add_library(xmr-stak SHARED ${SRCFILES_CPP} ${CUDASRCFILES} ${OPENCLSRCFILES})
 set(EXECUTABLE_OUTPUT_PATH "bin")
 set(LIBRARY_OUTPUT_PATH "bin")
 
-target_link_libraries(xmr-stak ${LIBS} xmr-stak-c xmr-stak-backend ${OpenCL_LIBRARY} ${CUDA_LIBRARIES})
+#target_link_libraries(xmr-stak ${LIBS} xmr-stak-c xmr-stak-backend ${OpenCL_LIBRARY} ${CUDA_LIBRARIES})
+target_link_libraries(xmr-stak ${LIBS} xmr-stak-c ${CMAKE_DL_LIBS} ${OpenCL_LIBRARY} ${CUDA_LIBRARIES})
 
 ################################################################################
 # Install
