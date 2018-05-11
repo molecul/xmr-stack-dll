@@ -130,10 +130,8 @@ bool minethd::self_test()
 
 extern "C"
 {
-#ifdef WIN32
-__declspec(dllexport)
-#endif
-std::vector<iBackend*>* xmrstak_start_backend(uint32_t threadOffset, miner_work& pWork, environment& env)
+//std::vector<iBackend*>* xmrstak_start_backend(uint32_t threadOffset, miner_work& pWork, environment& env)
+std::vector<iBackend*>* backend_connector_nvidia(uint32_t threadOffset, miner_work& pWork, environment& env)
 {
 	environment::inst(&env);
 	return nvidia::minethd::thread_starter(threadOffset, pWork);

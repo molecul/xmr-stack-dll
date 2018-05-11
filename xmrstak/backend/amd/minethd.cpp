@@ -72,10 +72,8 @@ minethd::minethd(miner_work& pWork, size_t iNo, GpuContext* ctx, const jconf::th
 }
 
 extern "C"  {
-#ifdef WIN32
-__declspec(dllexport) 
-#endif
-std::vector<iBackend*>* xmrstak_start_backend(uint32_t threadOffset, miner_work& pWork, environment& env)
+//std::vector<iBackend*>* xmrstak_start_backend(uint32_t threadOffset, miner_work& pWork, environment& env)
+std::vector<iBackend*>* backend_connector_amd(uint32_t threadOffset, miner_work& pWork, environment& env)
 {
 	environment::inst(&env);
 	return amd::minethd::thread_starter(threadOffset, pWork);
