@@ -47,8 +47,8 @@
 #include <bitset>
 
 
-std::vector<iBackend*>* backend_connector_nvidia(uint32_t threadOffset, miner_work& pWork, environment& env);
-std::vector<iBackend*>* backend_connector_amd(uint32_t threadOffset, miner_work& pWork, environment& env);
+std::vector<xmrstak::iBackend*>* backend_connector_nvidia(uint32_t threadOffset, xmrstak::miner_work& pWork, xmrstak::environment& env);
+std::vector<xmrstak::iBackend*>* backend_connector_amd   (uint32_t threadOffset, xmrstak::miner_work& pWork, xmrstak::environment& env);
 
 namespace xmrstak
 {
