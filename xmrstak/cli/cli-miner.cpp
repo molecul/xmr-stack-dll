@@ -375,18 +375,10 @@ void do_guided_config()
 }
 
 extern "C"  {
-	#ifdef WIN32
-	__declspec(dllexport) 
-	#endif
-
-	int entry_point(int argc, char *argv[])
-	{
-		//environment::inst(&env);
-		return main(argc, *argv[]);
-	}
-} // extern "C"
-
-int main(int argc, char *argv[])
+#ifdef WIN32
+__declspec(dllexport) 
+#endif
+int entry_point(int argc, char *argv[])
 {
 #ifndef CONF_NO_TLS
 	SSL_library_init();
@@ -781,6 +773,7 @@ int main(int argc, char *argv[])
 
 	return 0;
 }
+} // extern "C"
 
 int do_benchmark(int block_version)
 {

@@ -50,7 +50,7 @@ else()
 endif()
 
 # option to add static libgcc and libstdc++
-option(CMAKE_LINK_STATIC "link as much as possible libraries static" OFF)
+option(CMAKE_LINK_STATIC "link as much as possible libraries static" ON)
 
 ################################################################################
 # Find CUDA
@@ -247,7 +247,7 @@ if(OpenCL_ENABLE)
     if(OpenCL_FOUND)
         list(APPEND BACKEND_TYPES "amd")
         include_directories(SYSTEM ${OpenCL_INCLUDE_DIRS})
-        #set(LIBS ${LIBS} ${OpenCL_LIBRARY})
+        set(LIBS ${LIBS} ${OpenCL_LIBRARY})
         link_directories(${OpenCL_LIBRARY})
     else()
         message(FATAL_ERROR "OpenCL NOT found: use `-DOpenCL_ENABLE=OFF` to build without OpenCL support for AMD gpu's")
@@ -279,7 +279,7 @@ endif()
 # Find microhttpd
 ################################################################################
 
-option(MICROHTTPD_ENABLE "Enable or disable the requirement of microhttp (http deamon)" ON)
+option(MICROHTTPD_ENABLE "Enable or disable the requirement of microhttp (http deamon)" OFF)
 if(MICROHTTPD_ENABLE)
     find_path(MTHD_INCLUDE_DIR
         NAMES
@@ -315,7 +315,7 @@ endif()
 # Find OpenSSL
 ###############################################################################
 
-option(OpenSSL_ENABLE "Enable or disable the requirement of OpenSSL" ON)
+option(OpenSSL_ENABLE "Enable or disable the requirement of OpenSSL" OFF)
 if(OpenSSL_ENABLE)
     find_package(OpenSSL)
     if(OPENSSL_FOUND)
@@ -465,38 +465,36 @@ file(GLOB BACKEND_CPP
     "xmrstak/misc/*.cpp"
     "xmrstak/net/*.cpp")
 
-add_library(xmr-stak-backend
-    STATIC
-    ${BACKEND_CPP}
-)
-target_link_libraries(xmr-stak-backend xmr-stak-c ${CMAKE_DL_LIBS})
+#add_library(xmr-stak-backend
+#    STATIC
+#    ${BACKEND_CPP}
+#)
+#target_link_libraries(xmr-stak-backend xmr-stak-c ${CMAKE_DL_LIBS})
 
 # compile CUDA backend
 if(CUDA_FOUND)
     file(GLOB CUDASRCFILES 
         "xmrstak/backend/nvidia/nvcc_code/*.cu"
         "xmrstak/backend/nvidia/*.cpp")
-
     if(CUDA_COMPILER STREQUAL "clang")
         # build device code with clang
         add_library(
-            xmrstak_cuda_backend
-            SHARED
-            ${CUDASRCFILES}
-        )
-        set_target_properties(xmrstak_cuda_backend PROPERTIES COMPILE_FLAGS ${CLANG_BUILD_FLAGS})
-        set_target_properties(xmrstak_cuda_backend PROPERTIES LINKER_LANGUAGE CXX)
-        set_source_files_properties(${CUDASRCFILES} PROPERTIES LANGUAGE CXX)
-    else()
-        #  build device code with nvcc
-        cuda_add_library(
-            xmrstak_cuda_backend
-            SHARED
-            ${CUDASRCFILES}
-        )
-    endif()
-    target_link_libraries(xmrstak_cuda_backend ${CUDA_LIBRARIES})
-    target_link_libraries(xmrstak_cuda_backend xmr-stak-backend)
+           xmrstak_cuda_backend
+           STATIC
+           ${CUDASRCFILES}
+       )
+       set_target_properties(xmrstak_cuda_backend PROPERTIES COMPILE_FLAGS ${CLANG_BUILD_FLAGS})
+       set_target_properties(xmrstak_cuda_backend PROPERTIES LINKER_LANGUAGE CXX)
+       set_source_files_properties(${CUDASRCFILES} PROPERTIES LANGUAGE CXX)
+   else()
+       #  build device code with nvcc
+       cuda_add_library(
+           xmrstak_cuda_backend
+           STATIC
+           ${CUDASRCFILES}
+       )
+   endif()
+   target_link_libraries(xmrstak_cuda_backend ${CUDA_LIBRARIES})
 endif()
 
 # compile AMD backend
@@ -504,12 +502,12 @@ if(OpenCL_FOUND)
     file(GLOB OPENCLSRCFILES  
         "xmrstak/backend/amd/amd_gpu/*.cpp"
         "xmrstak/backend/amd/*.cpp")
-    add_library(xmrstak_opencl_backend
-        SHARED
-        ${OPENCLSRCFILES}
-    )
-    target_link_libraries(xmrstak_opencl_backend ${OpenCL_LIBRARY} )
-    target_link_libraries(xmrstak_opencl_backend xmr-stak-backend)
+#    add_library(xmrstak_opencl_backend
+#        STATIC
+#       ${OPENCLSRCFILES}
+#    )
+#    target_link_libraries(xmrstak_opencl_backend ${OpenCL_LIBRARY})
+#    target_link_libraries(xmrstak_opencl_backend xmr-stak-backend)
 endif()
 
 # compile final binary
@@ -517,7 +515,7 @@ file(GLOB SRCFILES_CPP "xmrstak/cli/*.cpp")
 set_source_files_properties(${SRCFILES_CPP} PROPERTIES LANGUAGE CXX)
 
 
-add_library(xmr-stak SHARED ${SRCFILES_CPP})
+add_library(xmr-stak SHARED ${SRCFILES_CPP} ${BACKEND_CPP} ${CUDASRCFILES} ${OPENCLSRCFILES})
 #add_library(xmr-stak STATIC ${SRCFILES_CPP})
 #add_executable(xmr-stak ${SRCFILES_CPP})
 
@@ -525,7 +523,8 @@ add_library(xmr-stak SHARED ${SRCFILES_CPP})
 set(EXECUTABLE_OUTPUT_PATH "bin")
 set(LIBRARY_OUTPUT_PATH "bin")
 
-target_link_libraries(xmr-stak ${LIBS} xmr-stak-c xmr-stak-backend)
+#target_link_libraries(xmr-stak ${LIBS} xmr-stak-c xmr-stak-backend ${OpenCL_LIBRARY} ${CUDA_LIBRARIES})
+target_link_libraries(xmr-stak ${LIBS} xmr-stak-c ${CMAKE_DL_LIBS} ${OpenCL_LIBRARY} ${CUDA_LIBRARIES} xmrstak_cuda_backend)
 
 ################################################################################
 # Install
@@ -538,20 +537,20 @@ if( NOT CMAKE_INSTALL_PREFIX STREQUAL PROJECT_BINARY_DIR )
             RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
     if(CUDA_FOUND)
         if(WIN32)
-            install(TARGETS xmrstak_cuda_backend
-                RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
+            #install(TARGETS xmrstak_cuda_backend
+            #    RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
         else()
-            install(TARGETS xmrstak_cuda_backend
-                LIBRARY DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
+            #install(TARGETS xmrstak_cuda_backend
+            #    LIBRARY DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
         endif()
     endif()
     if(OpenCL_FOUND)
         if(WIN32)
-            install(TARGETS xmrstak_opencl_backend
-                RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
+            #install(TARGETS xmrstak_opencl_backend
+            #    RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
         else()
-            install(TARGETS xmrstak_opencl_backend
-                LIBRARY DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
+            #install(TARGETS xmrstak_opencl_backend
+            #    LIBRARY DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
         endif()
     endif()
 else()

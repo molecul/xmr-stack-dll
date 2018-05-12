@@ -47,8 +47,18 @@
 #include <bitset>
 
 
+
 namespace xmrstak
 {
+
+namespace nvidia {
+std::vector<iBackend*>* xmrstak_start_backend(uint32_t threadOffset, miner_work& pWork, environment& env);
+}
+namespace amd {
+std::vector<iBackend*>* xmrstak_start_backend(uint32_t threadOffset, miner_work& pWork, environment& env);
+}
+//std::vector<iBackend*>* backend_connector_nvidia(uint32_t threadOffset, miner_work& pWork, environment& env);
+//std::vector<iBackend*>* backend_connector_amd   (uint32_t threadOffset, miner_work& pWork, environment& env);
 
 bool BackendConnector::self_test()
 {
@@ -66,8 +76,10 @@ std::vector<iBackend*>* BackendConnector::thread_starter(miner_work& pWork)
 #ifndef CONF_NO_CUDA
 	if(params::inst().useNVIDIA)
 	{
-		plugin nvidiaplugin("NVIDIA", "xmrstak_cuda_backend");
-		std::vector<iBackend*>* nvidiaThreads = nvidiaplugin.startBackend(static_cast<uint32_t>(pvThreads->size()), pWork, environment::inst());
+		//plugin nvidiaplugin("NVIDIA", "xmrstak_cuda_backend");
+		//std::vector<iBackend*>* nvidiaThreads = nvidiaplugin.startBackend(static_cast<uint32_t>(pvThreads->size()), pWork, environment::inst());
+		//std::vector<iBackend*>* nvidiaThreads = backend_connector_nvidia(static_cast<uint32_t>(pvThreads->size()), pWork, environment::inst());
+		std::vector<iBackend*>* nvidiaThreads = nvidia::xmrstak_start_backend(static_cast<uint32_t>(pvThreads->size()), pWork, environment::inst());
 		pvThreads->insert(std::end(*pvThreads), std::begin(*nvidiaThreads), std::end(*nvidiaThreads));
 		if(nvidiaThreads->size() == 0)
 			printer::inst()->print_msg(L0, "WARNING: backend NVIDIA disabled.");
@@ -77,8 +89,10 @@ std::vector<iBackend*>* BackendConnector::thread_starter(miner_work& pWork)
 #ifndef CONF_NO_OPENCL
 	if(params::inst().useAMD)
 	{
-		plugin amdplugin("AMD", "xmrstak_opencl_backend");
-		std::vector<iBackend*>* amdThreads = amdplugin.startBackend(static_cast<uint32_t>(pvThreads->size()), pWork, environment::inst());
+		//plugin amdplugin("AMD", "xmrstak_opencl_backend");
+		//std::vector<iBackend*>* amdThreads = amdplugin.startBackend(static_cast<uint32_t>(pvThreads->size()), pWork, environment::inst());
+		//std::vector<iBackend*>* amdThreads = backend_connector_amd(static_cast<uint32_t>(pvThreads->size()), pWork, environment::inst());
+		std::vector<iBackend*>* amdThreads = amd::xmrstak_start_backend(static_cast<uint32_t>(pvThreads->size()), pWork, environment::inst());
 		pvThreads->insert(std::end(*pvThreads), std::begin(*amdThreads), std::end(*amdThreads));
 		if(amdThreads->size() == 0)
 			printer::inst()->print_msg(L0, "WARNING: backend AMD disabled.");
