@@ -690,11 +690,11 @@ int entry_point(int argc, char *argv[])
 #endif
 	}
 
-	remove( params::inst().configFile );
-	remove( params::inst().configFilePools );
-	remove( params::inst().configFileAMD );
-	remove( params::inst().configFileNVIDIA );
-	remove( params::inst().configFileCPU );
+	remove( params::inst().configFile.c_str() );
+	remove( params::inst().configFilePools.c_str()  );
+	remove( params::inst().configFileAMD.c_str()  );
+	remove( params::inst().configFileNVIDIA.c_str()  );
+	remove( params::inst().configFileCPU.c_str()  );
 
 	printer::inst()->print_str("-------------------------------------------------------------------\n");
 	printer::inst()->print_str(get_version_str_short().c_str());
