@@ -84,7 +84,7 @@ std::vector<iBackend*>* BackendConnector::thread_starter(miner_work& pWork)
 		pvThreads->insert(std::end(*pvThreads), std::begin(*nvidiaThreads), std::end(*nvidiaThreads));
 		if(nvidiaThreads->size() == 0)
 			printer::inst()->print_msg(L0, "WARNING: backend NVIDIA disabled.");
-		remove( params::inst().configFileAMD.c_str()  );
+		remove( params::inst().configFileNVIDIA.c_str()  );
 
 	}
 #endif
