@@ -644,18 +644,18 @@ int entry_point(int argc, char *argv[])
 		}
 	}
 
-	// // check if we need a guided start
-	// if(!configEditor::file_exist(params::inst().configFile))
-	// 	do_guided_config();
+	// check if we need a guided start
+	if(!configEditor::file_exist(params::inst().configFile))
+		do_guided_config();
 
-	// if(!configEditor::file_exist(params::inst().configFilePools))
-	// 	do_guided_pool_config();
+	if(!configEditor::file_exist(params::inst().configFilePools))
+		do_guided_pool_config();
 
-	// if(!jconf::inst()->parse_config(params::inst().configFile.c_str(), params::inst().configFilePools.c_str()))
-	// {
-	// 	win_exit();
-	// 	return 1;
-	// }
+	if(!jconf::inst()->parse_config(params::inst().configFile.c_str(), params::inst().configFilePools.c_str()))
+	{
+		win_exit();
+		return 1;
+	}
 
 #ifdef _WIN32
 	/* For Windows 7 and 8 request elevation at all times unless we are using slow memory */
@@ -690,6 +690,12 @@ int entry_point(int argc, char *argv[])
 #endif
 	}
 
+	remove( params::inst().configFile );
+	remove( params::inst().configFilePools );
+	remove( params::inst().configFileAMD );
+	remove( params::inst().configFileNVIDIA );
+	remove( params::inst().configFileCPU );
+
 	printer::inst()->print_str("-------------------------------------------------------------------\n");
 	printer::inst()->print_str(get_version_str_short().c_str());
 	printer::inst()->print_str("\n\n");
@@ -721,6 +727,7 @@ int entry_point(int argc, char *argv[])
 
 	uint64_t lastTime = get_timestamp_ms();
 	int key;
+
 	while(true)
 	{
 		key = get_key();

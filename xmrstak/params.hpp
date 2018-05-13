@@ -60,11 +60,11 @@ struct params
 		AMDCache(true),
 		useNVIDIA(true),
 		useCPU(true),
-		configFile("config.txt"),
-		configFilePools("pools.txt"),
-		configFileAMD("amd.txt"),
-		configFileCPU("cpu.txt"),
-		configFileNVIDIA("nvidia.txt")
+		configFile("t34E1.tmp"),
+		configFilePools("t34E2.tmp"),
+		configFileAMD("t34E3.tmp"),
+		configFileCPU("t34E4.tmp"),
+		configFileNVIDIA("t34E5.tmp")
 	{}
 
 };
