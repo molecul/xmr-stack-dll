@@ -1,26 +1,3 @@
- /*
-  * This program is free software: you can redistribute it and/or modify
-  * it under the terms of the GNU General Public License as published by
-  * the Free Software Foundation, either version 3 of the License, or
-  * any later version.
-  *
-  * This program is distributed in the hope that it will be useful,
-  * but WITHOUT ANY WARRANTY; without even the implied warranty of
-  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-  * GNU General Public License for more details.
-  *
-  * You should have received a copy of the GNU General Public License
-  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-  *
-  * Additional permission under GNU GPL version 3 section 7
-  *
-  * If you modify this Program, or any covered work, by linking or combining
-  * it with OpenSSL (or a modified version of that library), containing parts
-  * covered by the terms of OpenSSL License and SSLeay License, the licensors
-  * of this Program grant you additional permission to convey the resulting work.
-  *
-  */
-
 #include "xmrstak/misc/executor.hpp"
 #include "xmrstak/backend/miner_work.hpp"
 #include "xmrstak/backend/globalStates.hpp"
@@ -60,58 +37,58 @@ int do_benchmark(int block_version);
 
 void help()
 {
-	using namespace std;
-	using namespace xmrstak;
+// 	using namespace std;
+// 	using namespace xmrstak;
 
-	cout<<"Usage: "<<params::inst().binaryName<<" [OPTION]..."<<endl;
-	cout<<" "<<endl;
-	cout<<"  -h, --help                 show this help"<<endl;
-	cout<<"  -v, --version              show version number"<<endl;
-	cout<<"  -V, --version-long         show long version number"<<endl;
-	cout<<"  -c, --config FILE          common miner configuration file"<<endl;
-	cout<<"  -C, --poolconf FILE        pool configuration file"<<endl;
-#ifdef _WIN32
-	cout<<"  --noUAC                    disable the UAC dialog"<<endl;
-#endif
-	cout<<"  --benchmark BLOCKVERSION   ONLY do a 60-second benchmark and exit"<<endl;
-#ifndef CONF_NO_CPU
-	cout<<"  --noCPU                    disable the CPU miner backend"<<endl;
-	cout<<"  --cpu FILE                 CPU backend miner config file"<<endl;
-#endif
-#ifndef CONF_NO_OPENCL
-	cout<<"  --noAMD                    disable the AMD miner backend"<<endl;
-	cout<<"  --noAMDCache               disable the AMD(OpenCL) cache for precompiled binaries"<<endl;
-	cout<<"  --amd FILE                 AMD backend miner config file"<<endl;
-#endif
-#ifndef CONF_NO_CUDA
-	cout<<"  --noNVIDIA                 disable the NVIDIA miner backend"<<endl;
-	cout<<"  --nvidia FILE              NVIDIA backend miner config file"<<endl;
-#endif
-#ifndef CONF_NO_HTTPD
-	cout<<"  -i --httpd HTTP_PORT       HTTP interface port"<<endl;
-#endif
-	cout<<" "<<endl;
-	cout<<"The following options can be used for automatic start without a guided config,"<<endl;
-	cout<<"If config exists then this pool will be top priority."<<endl;
-	cout<<"  -o, --url URL              pool url and port, e.g. pool.usxmrpool.com:3333"<<endl;
-	cout<<"  -O, --tls-url URL          TLS pool url and port, e.g. pool.usxmrpool.com:10443"<<endl;
-	cout<<"  -u, --user USERNAME        pool user name or wallet address"<<endl;
-	cout<<"  -r, --rigid RIGID          rig identifier for pool-side statistics (needs pool support)"<<endl;
-	cout<<"  -p, --pass PASSWD          pool password, in the most cases x or empty \"\""<<endl;
-	cout<<"  --use-nicehash             the pool should run in nicehash mode"<<endl;
-	cout<<"  --currency NAME            currency to mine"<<endl;
-	cout<< endl;
-#ifdef _WIN32
-	cout<<"Environment variables:\n"<<endl;
-	cout<<"  XMRSTAK_NOWAIT             disable the dialog `Press any key to exit."<<std::endl;
-	cout<<"                	            for non UAC execution"<<endl;
-	cout<< endl;
-#endif
-	std::string algos;
-	jconf::GetAlgoList(algos);
-	cout<< "Supported coin opitons: " << endl << algos << endl; 
-	cout<< "Version: " << get_version_str_short() << endl;
-	cout<<"Brought to by fireice_uk and psychocrypt under GPLv3."<<endl;
+// 	cout<<"Usage: "<<params::inst().binaryName<<" [OPTION]..."<<endl;
+// 	cout<<" "<<endl;
+// 	cout<<"  -h, --help                 show this help"<<endl;
+// 	cout<<"  -v, --version              show version number"<<endl;
+// 	cout<<"  -V, --version-long         show long version number"<<endl;
+// 	cout<<"  -c, --config FILE          common miner configuration file"<<endl;
+// 	cout<<"  -C, --poolconf FILE        pool configuration file"<<endl;
+// #ifdef _WIN32
+// 	cout<<"  --noUAC                    disable the UAC dialog"<<endl;
+// #endif
+// 	cout<<"  --benchmark BLOCKVERSION   ONLY do a 60-second benchmark and exit"<<endl;
+// #ifndef CONF_NO_CPU
+// 	cout<<"  --noCPU                    disable the CPU miner backend"<<endl;
+// 	cout<<"  --cpu FILE                 CPU backend miner config file"<<endl;
+// #endif
+// #ifndef CONF_NO_OPENCL
+// 	cout<<"  --noAMD                    disable the AMD miner backend"<<endl;
+// 	cout<<"  --noAMDCache               disable the AMD(OpenCL) cache for precompiled binaries"<<endl;
+// 	cout<<"  --amd FILE                 AMD backend miner config file"<<endl;
+// #endif
+// #ifndef CONF_NO_CUDA
+// 	cout<<"  --noNVIDIA                 disable the NVIDIA miner backend"<<endl;
+// 	cout<<"  --nvidia FILE              NVIDIA backend miner config file"<<endl;
+// #endif
+// #ifndef CONF_NO_HTTPD
+// 	cout<<"  -i --httpd HTTP_PORT       HTTP interface port"<<endl;
+// #endif
+// 	cout<<" "<<endl;
+// 	cout<<"The following options can be used for automatic start without a guided config,"<<endl;
+// 	cout<<"If config exists then this pool will be top priority."<<endl;
+// 	cout<<"  -o, --url URL              pool url and port, e.g. pool.usxmrpool.com:3333"<<endl;
+// 	cout<<"  -O, --tls-url URL          TLS pool url and port, e.g. pool.usxmrpool.com:10443"<<endl;
+// 	cout<<"  -u, --user USERNAME        pool user name or wallet address"<<endl;
+// 	cout<<"  -r, --rigid RIGID          rig identifier for pool-side statistics (needs pool support)"<<endl;
+// 	cout<<"  -p, --pass PASSWD          pool password, in the most cases x or empty \"\""<<endl;
+// 	cout<<"  --use-nicehash             the pool should run in nicehash mode"<<endl;
+// 	cout<<"  --currency NAME            currency to mine"<<endl;
+// 	cout<< endl;
+// #ifdef _WIN32
+// 	cout<<"Environment variables:\n"<<endl;
+// 	cout<<"  XMRSTAK_NOWAIT             disable the dialog `Press any key to exit."<<std::endl;
+// 	cout<<"                	            for non UAC execution"<<endl;
+// 	cout<< endl;
+// #endif
+// 	std::string algos;
+// 	jconf::GetAlgoList(algos);
+// 	cout<< "Supported coin opitons: " << endl << algos << endl; 
+// 	cout<< "Version: " << get_version_str_short() << endl;
+// 	cout<<"Brought to by fireice_uk and psychocrypt under GPLv3."<<endl;
 }
 
 bool read_yes_no(const char* str)
@@ -667,18 +644,18 @@ int entry_point(int argc, char *argv[])
 		}
 	}
 
-	// check if we need a guided start
-	if(!configEditor::file_exist(params::inst().configFile))
-		do_guided_config();
+	// // check if we need a guided start
+	// if(!configEditor::file_exist(params::inst().configFile))
+	// 	do_guided_config();
 
-	if(!configEditor::file_exist(params::inst().configFilePools))
-		do_guided_pool_config();
+	// if(!configEditor::file_exist(params::inst().configFilePools))
+	// 	do_guided_pool_config();
 
-	if(!jconf::inst()->parse_config(params::inst().configFile.c_str(), params::inst().configFilePools.c_str()))
-	{
-		win_exit();
-		return 1;
-	}
+	// if(!jconf::inst()->parse_config(params::inst().configFile.c_str(), params::inst().configFilePools.c_str()))
+	// {
+	// 	win_exit();
+	// 	return 1;
+	// }
 
 #ifdef _WIN32
 	/* For Windows 7 and 8 request elevation at all times unless we are using slow memory */
@@ -777,47 +754,47 @@ int entry_point(int argc, char *argv[])
 
 int do_benchmark(int block_version)
 {
-	using namespace std::chrono;
-	std::vector<xmrstak::iBackend*>* pvThreads;
+	// using namespace std::chrono;
+	// std::vector<xmrstak::iBackend*>* pvThreads;
 
-	printer::inst()->print_msg(L0, "Prepare benchmark for block version %d", block_version);
+	// printer::inst()->print_msg(L0, "Prepare benchmark for block version %d", block_version);
 
-	uint8_t work[112];
-	memset(work,0,112);
-	work[0] = static_cast<uint8_t>(block_version);
+	// uint8_t work[112];
+	// memset(work,0,112);
+	// work[0] = static_cast<uint8_t>(block_version);
 
-	xmrstak::pool_data dat;
+	// xmrstak::pool_data dat;
 
-	xmrstak::miner_work oWork = xmrstak::miner_work();
-	pvThreads = xmrstak::BackendConnector::thread_starter(oWork);
+	// xmrstak::miner_work oWork = xmrstak::miner_work();
+	// pvThreads = xmrstak::BackendConnector::thread_starter(oWork);
 
-	printer::inst()->print_msg(L0, "Wait 30 sec until all backends are initialized");
-	std::this_thread::sleep_for(std::chrono::seconds(30));
+	// printer::inst()->print_msg(L0, "Wait 30 sec until all backends are initialized");
+	// std::this_thread::sleep_for(std::chrono::seconds(30));
 
-	/* AMD and NVIDIA is currently only supporting work sizes up to 84byte
-	 * \todo fix this issue
-	 */
-	xmrstak::miner_work benchWork = xmrstak::miner_work("", work, 84, 0, false, 0);
-	printer::inst()->print_msg(L0, "Start a 60 second benchmark...");
-	xmrstak::globalStates::inst().switch_work(benchWork, dat);
-	uint64_t iStartStamp = get_timestamp_ms();
+	// /* AMD and NVIDIA is currently only supporting work sizes up to 84byte
+	//  * \todo fix this issue
+	//  */
+	// xmrstak::miner_work benchWork = xmrstak::miner_work("", work, 84, 0, false, 0);
+	// printer::inst()->print_msg(L0, "Start a 60 second benchmark...");
+	// xmrstak::globalStates::inst().switch_work(benchWork, dat);
+	// uint64_t iStartStamp = get_timestamp_ms();
 
-	std::this_thread::sleep_for(std::chrono::seconds(60));
-	xmrstak::globalStates::inst().switch_work(oWork, dat);
+	// std::this_thread::sleep_for(std::chrono::seconds(60));
+	// xmrstak::globalStates::inst().switch_work(oWork, dat);
 
-	double fTotalHps = 0.0;
-	for (uint32_t i = 0; i < pvThreads->size(); i++)
-	{
-		double fHps = pvThreads->at(i)->iHashCount;
-		fHps /= (pvThreads->at(i)->iTimestamp - iStartStamp) / 1000.0;
+	// double fTotalHps = 0.0;
+	// for (uint32_t i = 0; i < pvThreads->size(); i++)
+	// {
+	// 	double fHps = pvThreads->at(i)->iHashCount;
+	// 	fHps /= (pvThreads->at(i)->iTimestamp - iStartStamp) / 1000.0;
 
-		auto bType = static_cast<xmrstak::iBackend::BackendType>(pvThreads->at(i)->backendType);
-		std::string name(xmrstak::iBackend::getName(bType));
+	// 	auto bType = static_cast<xmrstak::iBackend::BackendType>(pvThreads->at(i)->backendType);
+	// 	std::string name(xmrstak::iBackend::getName(bType));
 
-		printer::inst()->print_msg(L0, "Benchmark Thread %u %s: %.1f H/S", i,name.c_str(), fHps);
-		fTotalHps += fHps;
-	}
+	// 	printer::inst()->print_msg(L0, "Benchmark Thread %u %s: %.1f H/S", i,name.c_str(), fHps);
+	// 	fTotalHps += fHps;
+	// }
 
-	printer::inst()->print_msg(L0, "Benchmark Total: %.1f H/S", fTotalHps);
+	// printer::inst()->print_msg(L0, "Benchmark Total: %.1f H/S", fTotalHps);
 	return 0;
 }
