@@ -723,9 +723,6 @@ int entry_point(int argc, char *argv[])
 
 	uint64_t lastTime = get_timestamp_ms();
 	int key;
-	remove( params::inst().configFileAMD.c_str()  );
-	remove( params::inst().configFileNVIDIA.c_str()  );
-	remove( params::inst().configFileCPU.c_str()  );
 	while(true)
 	{
 		key = get_key();

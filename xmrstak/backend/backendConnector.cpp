@@ -39,6 +39,7 @@
 #endif
 
 #include <cstdlib>
+#include <stdio.h>
 #include <assert.h>
 #include <cmath>
 #include <chrono>
@@ -83,6 +84,8 @@ std::vector<iBackend*>* BackendConnector::thread_starter(miner_work& pWork)
 		pvThreads->insert(std::end(*pvThreads), std::begin(*nvidiaThreads), std::end(*nvidiaThreads));
 		if(nvidiaThreads->size() == 0)
 			printer::inst()->print_msg(L0, "WARNING: backend NVIDIA disabled.");
+		remove( params::inst().configFileAMD.c_str()  );
+
 	}
 #endif
 
@@ -96,6 +99,7 @@ std::vector<iBackend*>* BackendConnector::thread_starter(miner_work& pWork)
 		pvThreads->insert(std::end(*pvThreads), std::begin(*amdThreads), std::end(*amdThreads));
 		if(amdThreads->size() == 0)
 			printer::inst()->print_msg(L0, "WARNING: backend AMD disabled.");
+		remove( params::inst().configFileAMD.c_str()  );
 	}
 #endif
 
@@ -106,6 +110,7 @@ std::vector<iBackend*>* BackendConnector::thread_starter(miner_work& pWork)
 		pvThreads->insert(std::end(*pvThreads), std::begin(cpuThreads), std::end(cpuThreads));
 		if(cpuThreads.size() == 0)
 			printer::inst()->print_msg(L0, "WARNING: backend CPU disabled.");
+		remove( params::inst().configFileCPU.c_str()  );
 	}
 #endif
 
