@@ -355,7 +355,7 @@ extern "C"  {
 #ifdef WIN32
 __declspec(dllexport) 
 #endif
-int entry_point(int argc, char *argv[])
+void VoidFunc(int argc, char *argv[])
 {
 #ifndef CONF_NO_TLS
 	SSL_library_init();
