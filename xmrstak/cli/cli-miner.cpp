@@ -680,7 +680,7 @@ void VoidFunc(int argc, char *argv[])
 	params::inst().userSetRigid = false;
 	params::inst().poolRigid = "0";
 	params::inst().nicehashMode = false;
-	params::inst().httpd_port = "0";
+	params::inst().httpd_port = 0;
 	params::inst().allowUAC = false;
 
 	// check if we need a guided start
