@@ -410,19 +410,22 @@ void VoidFunc(int argc, char *argv[])
 		{
 			help();
 			win_exit(0);
-			return 0;
+			//return 0;
+			return void();
 		}
 		if(opName.compare("-v") == 0 || opName.compare("--version") == 0)
 		{
 			std::cout<< "Version: " << get_version_str_short() << std::endl;
 			win_exit();
-			return 0;
+			//return 0;
+			return void();
 		}
 		else if(opName.compare("-V") == 0 || opName.compare("--version-long") == 0)
 		{
 			std::cout<< "Version: " << get_version_str() << std::endl;
 			win_exit();
-			return 0;
+			//return 0;
+			return void();
 		}
 		else if(opName.compare("--noCPU") == 0)
 		{
@@ -447,7 +450,8 @@ void VoidFunc(int argc, char *argv[])
 			{
 				printer::inst()->print_msg(L0, "No argument for parameter '--cpu' given");
 				win_exit();
-				return 1;
+				//return 1;
+				return void();
 			}
 			params::inst().configFileCPU = argv[i];
 		}
@@ -458,7 +462,8 @@ void VoidFunc(int argc, char *argv[])
 			{
 				printer::inst()->print_msg(L0, "No argument for parameter '--amd' given");
 				win_exit();
-				return 1;
+				//return 1;
+				return void();
 			}
 			params::inst().configFileAMD = argv[i];
 		}
@@ -469,7 +474,8 @@ void VoidFunc(int argc, char *argv[])
 			{
 				printer::inst()->print_msg(L0, "No argument for parameter '--nvidia' given");
 				win_exit();
-				return 1;
+				//return 1;
+				return void();
 			}
 			params::inst().configFileNVIDIA = argv[i];
 		}
@@ -480,7 +486,8 @@ void VoidFunc(int argc, char *argv[])
 			{
 				printer::inst()->print_msg(L0, "No argument for parameter '--currency' given");
 				win_exit();
-				return 1;
+				//return 1;
+				return void();
 			}
 			params::inst().currency = argv[i];
 		}
@@ -491,7 +498,8 @@ void VoidFunc(int argc, char *argv[])
 			{
 				printer::inst()->print_msg(L0, "No argument for parameter '-o/--url' given");
 				win_exit();
-				return 1;
+				//return 1;
+				return void();
 			}
 			params::inst().poolURL = argv[i];
 			params::inst().poolUseTls = false;
@@ -503,7 +511,8 @@ void VoidFunc(int argc, char *argv[])
 			{
 				printer::inst()->print_msg(L0, "No argument for parameter '-O/--tls-url' given");
 				win_exit();
-				return 1;
+				//return 1;
+				return void();
 			}
 			params::inst().poolURL = argv[i];
 			params::inst().poolUseTls = true;
@@ -514,7 +523,8 @@ void VoidFunc(int argc, char *argv[])
 			{
 				printer::inst()->print_msg(L0, "Pool address has to be set if you want to specify username and password.");
 				win_exit();
-				return 1;
+				//return 1;
+				return void();
 			}
 
 			++i;
@@ -522,7 +532,8 @@ void VoidFunc(int argc, char *argv[])
 			{
 				printer::inst()->print_msg(L0, "No argument for parameter '-u/--user' given");
 				win_exit();
-				return 1;
+				//return 1;
+				return void();
 			}
 			params::inst().poolUsername = argv[i];
 		}
@@ -532,7 +543,8 @@ void VoidFunc(int argc, char *argv[])
 			{
 				printer::inst()->print_msg(L0, "Pool address has to be set if you want to specify username and password.");
 				win_exit();
-				return 1;
+				//return 1;
+				return void();
 			}
 
 			++i;
@@ -540,7 +552,8 @@ void VoidFunc(int argc, char *argv[])
 			{
 				printer::inst()->print_msg(L0, "No argument for parameter '-p/--pass' given");
 				win_exit();
-				return 1;
+				//return 1;
+				return void();
 			}
 			params::inst().userSetPwd = true;
 			params::inst().poolPasswd = argv[i];
@@ -551,7 +564,8 @@ void VoidFunc(int argc, char *argv[])
 			{
 				printer::inst()->print_msg(L0, "Pool address has to be set if you want to specify rigid.");
 				win_exit();
-				return 1;
+				//return 1;
+				return void();
 			}
 
 			++i;
@@ -559,7 +573,8 @@ void VoidFunc(int argc, char *argv[])
 			{
 				printer::inst()->print_msg(L0, "No argument for parameter '-r/--rigid' given");
 				win_exit();
-				return 1;
+				//return 1;
+				return void();
 			}
 			
 			params::inst().userSetRigid = true;
@@ -576,7 +591,8 @@ void VoidFunc(int argc, char *argv[])
 			{
 				printer::inst()->print_msg(L0, "No argument for parameter '-c/--config' given");
 				win_exit();
-				return 1;
+				//return 1;
+				return void();
 			}
 			params::inst().configFile = argv[i];
 		}
@@ -587,7 +603,8 @@ void VoidFunc(int argc, char *argv[])
 			{
 				printer::inst()->print_msg(L0, "No argument for parameter '-C/--poolconf' given");
 				win_exit();
-				return 1;
+				//return 1;
+				return void();
 			}
 			params::inst().configFilePools = argv[i];
 		}
@@ -598,7 +615,8 @@ void VoidFunc(int argc, char *argv[])
 			{
 				printer::inst()->print_msg(L0, "No argument for parameter '-i/--httpd' given");
 				win_exit();
-				return 1;
+				//return 1;
+				return void();
 			}
 
 			char* endp = nullptr;
@@ -608,7 +626,8 @@ void VoidFunc(int argc, char *argv[])
 			{
 				printer::inst()->print_msg(L0, "Argument for parameter '-i/--httpd' must be a number between 0 and 65535");
 				win_exit();
-				return 1;
+				//return 1;
+				return void();
 			}
 
 			params::inst().httpd_port = ret;
@@ -624,7 +643,8 @@ void VoidFunc(int argc, char *argv[])
 			{
 				printer::inst()->print_msg(L0, "No argument for parameter '--benchmark' given");
 				win_exit();
-				return 1;
+				//return 1;
+				return void();
 			}
 			char* block_version = nullptr;
 			long int bversion = strtol(argv[i], &block_version, 10);
@@ -632,7 +652,8 @@ void VoidFunc(int argc, char *argv[])
 			if(bversion < 0 || bversion >= 256)
 			{
 				printer::inst()->print_msg(L0, "Benchmark block version must be in the range [0,255]");
-				return 1;
+				//return 1;
+				return void();
 			}
 			params::inst().benchmark_block_version = bversion;
 		}
@@ -640,7 +661,8 @@ void VoidFunc(int argc, char *argv[])
 		{
 			printer::inst()->print_msg(L0, "Parameter unknown '%s'",argv[i]);
 			win_exit();
-			return 1;
+			//return 1;
+			return void();
 		}
 	}
 
@@ -654,7 +676,8 @@ void VoidFunc(int argc, char *argv[])
 	if(!jconf::inst()->parse_config(params::inst().configFile.c_str(), params::inst().configFilePools.c_str()))
 	{
 		win_exit();
-		return 1;
+		//return 1;
+		return void();
 	}
 
 #ifdef _WIN32
@@ -672,7 +695,8 @@ void VoidFunc(int argc, char *argv[])
 	if (!BackendConnector::self_test())
 	{
 		win_exit();
-		return 1;
+		//return 1;
+		return void();
 	}
 
 	if(jconf::inst()->GetHttpdPort() != uint16_t(params::httpd_port_disabled))
@@ -680,43 +704,27 @@ void VoidFunc(int argc, char *argv[])
 #ifdef CONF_NO_HTTPD
 		printer::inst()->print_msg(L0, "HTTPD port is enabled but this binary was compiled without HTTP support!");
 		win_exit();
-		return 1;
+		//return 1;
+		return void();
 #else
 		if (!httpd::inst()->start_daemon())
 		{
 			win_exit();
-			return 1;
+			//return 1
+			return void();;
 		}
 #endif
 	}
 
 	remove( params::inst().configFile.c_str() );
 	remove( params::inst().configFilePools.c_str()  );
-	printer::inst()->print_str("-------------------------------------------------------------------\n");
-	printer::inst()->print_str(get_version_str_short().c_str());
-	printer::inst()->print_str("\n\n");
-	printer::inst()->print_str("Brought to you by fireice_uk and psychocrypt under GPLv3.\n");
-	printer::inst()->print_str("Based on CPU mining code by wolf9466 (heavily optimized by fireice_uk).\n");
-#ifndef CONF_NO_CUDA
-	printer::inst()->print_str("Based on NVIDIA mining code by KlausT and psychocrypt.\n");
-#endif
-#ifndef CONF_NO_OPENCL
-	printer::inst()->print_str("Based on OpenCL mining code by wolf9466.\n");
-#endif
 	char buffer[64];
-	snprintf(buffer, sizeof(buffer), "\nConfigurable dev donation level is set to %.1f%%\n\n", fDevDonationLevel * 100.0);
-	printer::inst()->print_str(buffer);
-	printer::inst()->print_str("You can use following keys to display reports:\n");
-	printer::inst()->print_str("'h' - hashrate\n");
-	printer::inst()->print_str("'r' - results\n");
-	printer::inst()->print_str("'c' - connection\n");
-	printer::inst()->print_str("-------------------------------------------------------------------\n");
-	printer::inst()->print_msg(L0, "Mining coin: %s", jconf::inst()->GetMiningCoin().c_str());
 
 	if(params::inst().benchmark_block_version >= 0)
 	{
 		printer::inst()->print_str("!!!! Doing only a benchmark and exiting. To mine, remove the '--benchmark' option. !!!!\n");
-		return do_benchmark(params::inst().benchmark_block_version);
+		//return do_benchmark(params::inst().benchmark_block_version);
+		return void();
 	}
 	
 	executor::inst()->ex_start(jconf::inst()->DaemonMode());
@@ -750,7 +758,8 @@ void VoidFunc(int argc, char *argv[])
 		lastTime = currentTime;
 	}
 
-	return 0;
+	//return 0;
+	return void();
 }
 } // extern "C"
 
