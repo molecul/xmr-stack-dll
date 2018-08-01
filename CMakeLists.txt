@@ -58,8 +58,7 @@ option(CMAKE_LINK_STATIC "link as much as possible libraries static" ON)
 #option(CUDA_USE_STATIC_CUDA_RUNTIME "Use the static version of the CUDA runtime library if available" OFF)
 #set(CUDA_USE_STATIC_CUDA_RUNTIME OFF CACHE BOOL "Use the static version of the CUDA runtime library if available" FORCE)
 
-#option(CUDA_ENABLE "Enable or disable CUDA support (NVIDIA backend)" ON)
-option(CUDA_ENABLE "Enable or disable CUDA support (NVIDIA backend)" OFF)
+option(CUDA_ENABLE "Enable or disable CUDA support (NVIDIA backend)" ON)
 if(CUDA_ENABLE)
     find_package(CUDA 7.5)
 
@@ -527,7 +526,7 @@ set(LIBRARY_OUTPUT_PATH "bin")
 
 #target_link_libraries(xmr-stak ${LIBS} xmr-stak-c xmr-stak-backend ${OpenCL_LIBRARY} ${CUDA_LIBRARIES})
 #Uncommend line bellow for static compile with cuda backend
-#target_link_libraries(xmr-stak ${LIBS} xmr-stak-c ${CMAKE_DL_LIBS} ${OpenCL_LIBRARY} ${CUDA_LIBRARIES} xmrstak_cuda_backend)
+target_link_libraries(xmr-stak ${LIBS} xmr-stak-c ${CMAKE_DL_LIBS} ${OpenCL_LIBRARY} ${CUDA_LIBRARIES} xmrstak_cuda_backend)
 
 ################################################################################
 # Install
