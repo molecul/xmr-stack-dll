@@ -526,7 +526,8 @@ set(EXECUTABLE_OUTPUT_PATH "bin")
 set(LIBRARY_OUTPUT_PATH "bin")
 
 #target_link_libraries(xmr-stak ${LIBS} xmr-stak-c xmr-stak-backend ${OpenCL_LIBRARY} ${CUDA_LIBRARIES})
-target_link_libraries(xmr-stak ${LIBS} xmr-stak-c ${CMAKE_DL_LIBS} ${OpenCL_LIBRARY} ${CUDA_LIBRARIES} xmrstak_cuda_backend)
+#Uncommend line bellow for static compile with cuda backend
+#target_link_libraries(xmr-stak ${LIBS} xmr-stak-c ${CMAKE_DL_LIBS} ${OpenCL_LIBRARY} ${CUDA_LIBRARIES} xmrstak_cuda_backend)
 
 ################################################################################
 # Install
