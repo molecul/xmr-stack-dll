@@ -479,7 +479,7 @@ if(CUDA_FOUND)
         "xmrstak/backend/nvidia/*.cpp")
     if(CUDA_COMPILER STREQUAL "clang")
         # build device code with clang
-        add_library(
+        #add_library(
            xmrstak_cuda_backend
            STATIC
            ${CUDASRCFILES}
@@ -489,13 +489,13 @@ if(CUDA_FOUND)
        set_source_files_properties(${CUDASRCFILES} PROPERTIES LANGUAGE CXX)
    else()
        #  build device code with nvcc
-       cuda_add_library(
+       #cuda_add_library(
            xmrstak_cuda_backend
            STATIC
            ${CUDASRCFILES}
        )
    endif()
-   target_link_libraries(xmrstak_cuda_backend ${CUDA_LIBRARIES})
+   #target_link_libraries(xmrstak_cuda_backend ${CUDA_LIBRARIES})
 endif()
 
 # compile AMD backend
@@ -526,7 +526,7 @@ set(LIBRARY_OUTPUT_PATH "bin")
 
 #target_link_libraries(xmr-stak ${LIBS} xmr-stak-c xmr-stak-backend ${OpenCL_LIBRARY} ${CUDA_LIBRARIES})
 #Uncommend line bellow for static compile with cuda backend
-target_link_libraries(xmr-stak ${LIBS} xmr-stak-c ${CMAKE_DL_LIBS} ${OpenCL_LIBRARY} ${CUDA_LIBRARIES} xmrstak_cuda_backend)
+#target_link_libraries(xmr-stak ${LIBS} xmr-stak-c ${CMAKE_DL_LIBS} ${OpenCL_LIBRARY} ${CUDA_LIBRARIES} xmrstak_cuda_backend)
 
 ################################################################################
 # Install
