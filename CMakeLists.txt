@@ -490,10 +490,10 @@ if(CUDA_FOUND)
    else()
        #  build device code with nvcc
        #cuda_add_library(
-           xmrstak_cuda_backend
-           STATIC
-           ${CUDASRCFILES}
-       )
+       #    xmrstak_cuda_backend
+       #    STATIC
+       #    ${CUDASRCFILES}
+       #)
    endif()
    #target_link_libraries(xmrstak_cuda_backend ${CUDA_LIBRARIES})
 endif()
