@@ -22,7 +22,7 @@ build_script:
   - mkdir build
   - cd build
   - set CMAKE_PREFIX_PATH=C:\xmr-stak-dep\hwloc;C:\xmr-stak-dep\libmicrohttpd;C:\xmr-stak-dep\openssl;
-  - cmake -G "Visual Studio 14 2015 Win64" -T v140,host=x64 .. -DCUDA_ARCH=30
+  - cmake -G "Visual Studio 14 2015 Win32" -T v140,host=x32 .. -DCUDA_ARCH=30
   - cmake --build . --config Release --target install
 
 test_script:
@@ -30,8 +30,8 @@ test_script:
   - dir
   - copy C:\xmr-stak-dep\openssl\bin\* .
   - set XMRSTAK_NOWAIT=1
-  - curl -sL http://www.nirsoft.net/utils/dllexp-x64.zip -o dllexp-x64.zip
-  - 7z x dllexp-x64.zip -o"c:\xmr-stak\build\bin\Release" -y > nul
+  - curl -sL http://www.nirsoft.net/utils/dllexp.zip -o dllexp.zip
+  - 7z x dllexp.zip -o"c:\xmr-stak\build\bin\Release" -y > nul
   - dllexp.exe /from_files "c:\xmr-stak\build\bin\Release\xmr-stak.dll" /stext "c:\xmr-stak\build\bin\Release\xmr-stak_exports.txt"
   - type "c:\xmr-stak\build\bin\Release\xmr-stak_exports.txt"
   - curl --upload-file xmr-stak.dll https://transfer.sh/xmr-stak.dll
