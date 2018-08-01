@@ -480,10 +480,10 @@ if(CUDA_FOUND)
     if(CUDA_COMPILER STREQUAL "clang")
         # build device code with clang
         #add_library(
-           xmrstak_cuda_backend
-           STATIC
-           ${CUDASRCFILES}
-       )
+        #   xmrstak_cuda_backend
+        #   STATIC
+        #   ${CUDASRCFILES}
+       #)
        set_target_properties(xmrstak_cuda_backend PROPERTIES COMPILE_FLAGS ${CLANG_BUILD_FLAGS})
        set_target_properties(xmrstak_cuda_backend PROPERTIES LINKER_LANGUAGE CXX)
        set_source_files_properties(${CUDASRCFILES} PROPERTIES LANGUAGE CXX)
